@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rivals Unlocker — Marvel Rivals Unlocker for Windows</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:
+      radial-gradient(1200px 700px at 15% -10%, rgba(88,101,242,.28), transparent 60%),
+      radial-gradient(1000px 600px at 90% 0%, rgba(168,85,247,.20), transparent 55%),
+      radial-gradient(900px 700px at 50% 110%, rgba(30,64,175,.25), transparent 60%),
+      linear-gradient(160deg,#070b1a 0%,#0b1024 35%,#0e1430 65%,#080c1c 100%);
+    color:#e6e9f5;
+    min-height:100vh;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  ::selection{background:rgba(124,110,245,.45);color:#fff}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 22px}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:100;
+    backdrop-filter:blur(16px) saturate(160%);
+    -webkit-backdrop-filter:blur(16px) saturate(160%);
+    background:rgba(11,16,36,.62);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:68px;gap:18px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;letter-spacing:.2px}
+  .brand .mark{
+    width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+    background:linear-gradient(135deg,#6d5efc,#a855f7 55%,#22d3ee);
+    box-shadow:0 6px 20px rgba(109,94,252,.45);
+    font-size:.95rem;
+  }
+  .brand span.grad{
+    background:linear-gradient(90deg,#c7d2fe,#a5b4fc 40%,#e9d5ff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .nav-links{display:flex;align-items:center;gap:26px;font-size:.9rem;color:#a7b0cc}
+  .nav-links a{transition:color .2s}
+  .nav-links a:hover{color:#fff}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    font-weight:700;font-size:.92rem;border-radius:11px;cursor:pointer;
+    border:1px solid transparent;transition:transform .18s ease,box-shadow .25s ease,background .25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    padding:11px 20px;color:#fff;
+    background:linear-gradient(135deg,#6d5efc,#8b5cf6 50%,#6366f1);
+    box-shadow:0 8px 26px rgba(109,94,252,.42), inset 0 1px 0 rgba(255,255,255,.22);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(109,94,252,.6), inset 0 1px 0 rgba(255,255,255,.28)}
+  .btn-ghost{
+    padding:11px 20px;color:#dbe0f2;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.16);
+  }
+  .btn-ghost:hover{transform:translateY(-2px);background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.3)}
+  .nav-cta{padding:9px 17px;font-size:.86rem}
+
+  /* ---------- HERO ---------- */
+  header.hero{padding:88px 0 64px;text-align:center;position:relative}
+  .pill{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:7px 16px;border-radius:999px;font-size:.78rem;font-weight:600;
+    letter-spacing:.4px;color:#c9d2ff;
+    background:rgba(109,94,252,.12);
+    border:1px solid rgba(139,124,246,.38);
+    box-shadow:0 0 24px rgba(109,94,252,.22);
+    margin-bottom:26px;
+  }
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 10px #34d399;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  h1{
+    font-size:clamp(2.1rem,5.4vw,3.7rem);
+    line-height:1.1;letter-spacing:-1.4px;font-weight:800;
+    max-width:880px;margin:0 auto 22px;
+    background:linear-gradient(100deg,#ffffff 0%,#c7d2fe 32%,#a78bfa 62%,#67e8f9 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.lead{
+    max-width:640px;margin:0 auto 34px;color:#9aa4c4;font-size:1.06rem;
+  }
+  .hero-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:46px}
+  .hero-actions .btn{padding:14px 28px;font-size:1rem;border-radius:13px}
+  .stats{
+    display:flex;justify-content:center;flex-wrap:wrap;gap:12px;
+  }
+  .chip{
+    display:flex;align-items:center;gap:8px;
+    padding:10px 17px;border-radius:12px;font-size:.84rem;font-weight:600;color:#c3cbe4;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.09);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  .chip b{color:#fff;font-weight:800}
+  .chip .ico{font-size:.95rem}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:74px 0}
+  .sec-head{text-align:center;margin-bottom:52px}
+  .sec-kicker{
+    font-size:.76rem;font-weight:700;letter-spacing:2.4px;text-transform:uppercase;
+    color:#8b97e8;margin-bottom:12px;
+  }
+  .sec-head h2{font-size:clamp(1.6rem,3.4vw,2.35rem);font-weight:800;letter-spacing:-.8px;color:#fff}
+  .sec-head p{color:#8e98b8;max-width:560px;margin:12px auto 0;font-size:.98rem}
+
+  /* ---------- FEATURES ---------- */
+  .grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  }
+  .card{
+    position:relative;padding:26px 24px 28px;border-radius:16px;
+    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+    border:1px solid rgba(255,255,255,.09);
+    overflow:hidden;
+    transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+  }
+  .card::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,#6d5efc,#a855f7,#22d3ee);
+    opacity:.9;
+  }
+  .card:hover{
+    transform:translateY(-7px);
+    border-color:rgba(139,124,246,.45);
+    box-shadow:0 22px 44px -18px rgba(109,94,252,.55);
+  }
+  .card .emoji{
+    width:48px;height:48px;border-radius:13px;display:grid;place-items:center;
+    font-size:1.45rem;margin-bottom:17px;
+    background:rgba(109,94,252,.13);
+    border:1px solid rgba(139,124,246,.28);
+  }
+  .card h3{font-size:1.03rem;font-weight:750;color:#fff;margin-bottom:8px;letter-spacing:-.2px}
+  .card p{font-size:.875rem;color:#939dbe;line-height:1.62}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{position:relative;max-width:720px;margin:0 auto;padding-left:8px}
+  .steps::before{
+    content:"";position:absolute;left:31px;top:14px;bottom:14px;width:2px;
+    background:linear-gradient(180deg,rgba(109,94,252,.9),rgba(168,85,247,.6),rgba(34,211,238,.15));
+    border-radius:2px;
+  }
+  .step{position:relative;display:flex;gap:24px;padding:0 0 40px 0}
+  .step:last-child{padding-bottom:0}
+  .step .num{
+    flex:0 0 48px;width:48px;height:48px;border-radius:50%;
+    display:grid;place-items:center;font-weight:800;font-size:1.05rem;color:#fff;
+    background:linear-gradient(135deg,#5b4ffa,#8b5cf6);
+    border:3px solid #0b1024;
+    box-shadow:0 0 0 1px rgba(139,124,246,.5),0 8px 22px rgba(109,94,252,.4);
+    z-index:1;
+  }
+  .step .body{padding-top:8px}
+  .step h3{font-size:1.05rem;font-weight:750;color:#fff;margin-bottom:6px}
+  .step p{font-size:.9rem;color:#939dbe;max-width:520px}
+  .step code{
+    font-size:.8rem;background:rgba(109,94,252,.16);color:#c7d2fe;
+    padding:2px 7px;border-radius:6px;border:1px solid rgba(139,124,246,.3);
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+  details{
+    border-radius:14px;overflow:hidden;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.09);
+    transition:border-color .25s ease,background .25s ease;
+  }
+  details[open]{border-color:rgba(139,124,246,.42);background:rgba(109,94,252,.07)}
+  summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+    gap:16px;padding:19px 22px;font-weight:700;font-size:.97rem;color:#e8ebf8;
+    user-select:none;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary .plus{
+    flex:0 0 26px;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;
+    font-size:1.15rem;font-weight:400;color:#a5b4fc;
+    background:rgba(109,94,252,.16);
+    border:1px solid rgba(139,124,246,.3);
+    transition:transform .28s ease,color .2s,background .2s;
+  }
+  details[open] summary .plus{
+    transform:rotate(45deg);color:#fff;
+    background:linear-gradient(135deg,#6d5efc,#8b5cf6);
+  }
+  details .answer{padding:0 22px 21px;font-size:.9rem;color:#98a2c2;max-width:660px}
+
+  /* ---------- CTA BANNER ---------- */
+  .cta-banner{
+    position:relative;overflow:hidden;text-align:center;
+    border-radius:24px;padding:64px 30px;
+    background:linear-gradient(150deg,rgba(109,94,252,.20),rgba(168,85,247,.13) 45%,rgba(34,211,238,.08));
+    border:1px solid rgba(139,124,246,.35);
+    box-shadow:0 30px 80px -30px rgba(109,94,252,.6);
+  }
+  .cta-banner::before{
+    content:"";position:absolute;width:680px;height:680px;border-radius:50%;
+    left:50%;top:50%;transform:translate(-50%,-50%);
+    background:radial-gradient(circle,rgba(139,124,246,.42),rgba(109,94,252,.12) 45%,transparent 70%);
+    pointer-events:none;
+  }
+  .cta-banner .inner{position:relative;z-index:1}
+  .cta-banner h2{font-size:clamp(1.55rem,3.6vw,2.4rem);font-weight:800;letter-spacing:-1px;color:#fff;margin-bottom:14px}
+  .cta-banner p{color:#b2bbd8;max-width:520px;margin:0 auto 30px;font-size:.98rem}
+  .cta-banner .btn-primary{padding:15px 34px;font-size:1.02rem;border-radius:13px}
+  .cta-meta{margin-top:18px;font-size:.78rem;color:#8892b4;letter-spacing:.3px}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid rgba(255,255,255,.08);
+    padding:34px 0;margin-top:20px;
+    background:rgba(7,11,26,.5);
+  }
+  .foot{
+    display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+    font-size:.84rem;color:#7d87a8;
+  }
+  .foot .left{display:flex;align-items:center;gap:10px}
+  .foot .left .mark{
+    width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:.75rem;
+    background:linear-gradient(135deg,#6d5efc,#a855f7);
+  }
+  .foot a{color:#a5b4fc;font-weight:600;transition:color .2s}
+  .foot a:hover{color:#fff}
+  .foot .links{display:flex;gap:20px}
+  .disclaimer{
+    text-align:center;font-size:.72rem;color:#5f6885;
+    padding:0 22px 30px;max-width:820px;margin:0 auto;
+    line-height:1.7;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:640px){
+    .nav-links{display:none}
+    .nav-inner{height:62px}
+    .nav-cta{padding:9px 15px;font-size:.82rem}
+    header.hero{padding:60px 0 48px}
+    section{padding:54px 0}
+    .grid{grid-template-columns:1fr;gap:16px}
+    .hero-actions{gap:10px}
+    .hero-actions .btn{width:100%;padding:14px 20px}
+    .stats{gap:9px}
+    .chip{font-size:.78rem;padding:9px 13px}
+    .step{gap:18px}
+    .step .num{flex:0 0 42px;width:42px;height:42px;font-size:.95rem}
+    .steps::before{left:28px}
+    .cta-banner{padding:48px 22px;border-radius:18px}
+    .cta-banner .btn-primary{width:100%}
+    .foot{flex-direction:column;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="brand">
+      <div class="mark">⚡</div>
+      <span class="grad">rivals-unlocker</span>
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="btn btn-primary nav-cta" href="https://gitscore.cc" target="_blank" rel="noopener">Download</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="pill"><span class="dot"></span> Marvel Rivals · Windows Loader · v3.4.1</div>
+    <h1>Unlock Every Hero, Skin &amp; Advantage in Marvel Rivals</h1>
+    <p class="lead">
+      rivals-unlocker is a lightweight Windows injector for Marvel Rivals that ships an aimbot,
+      ESP/wallhack, full skin &amp; hero unlocker and a built-in anti-cheat bypass — all in one
+      clean loader with a single click.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://gitscore.cc" target="_blank" rel="noopener">⬇ Download for Windows</a>
+      <a class="btn btn-ghost" href="https://gitscore.cc" target="_blank" rel="noopener">★ View on GitHub</a>
+    </div>
+    <div class="stats">
+      <div class="chip"><span class="ico">⬇</span> <b>148,000+</b> downloads</div>
+      <div class="chip"><span class="ico">🏷</span> Version <b>3.4.1</b></div>
+      <div class="chip"><span class="ico">🪟</span> <b>Windows 10 / 11</b></div>
+      <div class="chip"><span class="ico">🆓</span> <b>Free &amp; open source</b></div>
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Features</div>
+      <h2>Everything in one loader</h2>
+      <p>Six battle-tested modules built specifically for Marvel Rivals — no extra tools, no dependencies.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="emoji">🎯</div>
+        <h3>Precision Aimbot</h3>
+        <p>Silent-aim and smooth-aim modes with per-hero bone targeting, FOV control and humanized smoothing to keep your shots clean and consistent.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">👁️</div>
+        <h3>ESP &amp; Wallhack</h3>
+        <p>See enemies, allies and pickups through walls with box ESP, skeleton, health bars, distance readouts and hero-name labels.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🦸</div>
+        <h3>Skin &amp; Hero Unlocker</h3>
+        <p>Instantly unlock every hero and cosmetic skin client-side, including seasonal and event outfits — no purchases, no grinding.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">💉</div>
+        <h3>One-Click Injector</h3>
+        <p>A clean DLL injector that attaches to Marvel Rivals automatically, loads the module and shows a live status log in the loader window.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🛡️</div>
+        <h3>Anti-Cheat Bypass</h3>
+        <p>Runs with a kernel-level bypass layer and signature randomization, updated after every Marvel Rivals patch and anti-cheat rollout.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🎛️</div>
+        <h3>In-Game Menu</h3>
+        <p>Press <b>INSERT</b> to open a lightweight overlay — toggle modules, tweak aim settings and save configs per hero without leaving the match.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">How it works</div>
+      <h2>Up and running in under a minute</h2>
+      <p>No compilers, no setup wizards — just download, extract and inject.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <div class="body">
+          <h3>Download the loader</h3>
+          <p>Grab the latest <code>rivals-unlocker.zip</code> from the download page and extract it to any folder on your Windows 10 or 11 PC.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div class="body">
+          <h3>Launch &amp; inject</h3>
+          <p>Start Marvel Rivals, then run <code>RivalsUnlocker.exe</code> as administrator and press <b>Inject</b>. The loader attaches and confirms status.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div class="body">
+          <h3>Open the menu &amp; play</h3>
+          <p>Press <b>INSERT</b> in-game to open the overlay. Enable aimbot, ESP and the skin unlocker, then save your config — you're ready to queue.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">FAQ</div>
+      <h2>Frequently asked questions</h2>
+      <p>Everything you need to know before installing rivals-unlocker.</p>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Is rivals-unlocker detected by Marvel Rivals anti-cheat?<span class="plus">+</span></summary>
+        <div class="answer">
+          The loader ships with a dedicated anti-cheat bypass layer and randomized module signatures that are updated after every
+          Marvel Rivals patch. No bypass is ever 100% risk-free, so we always recommend testing on a secondary account first.
+        </div>
+      </details>
+      <details>
+        <summary>Does the skin and hero unlocker work on all characters?<span class="plus">+</span></summary>
+        <div class="answer">
+          Yes. The unlocker covers every hero currently in Marvel Rivals plus seasonal, event and store-exclusive skins.
+          Unlocks are applied client-side, so other players will see the default skin while you see the unlocked one.
+        </div>
+      </details>
+      <details>
+        <summary>Which Windows versions are supported?<span class="plus">+</span></summary>
+        <div class="answer">
+          rivals-unlocker runs on Windows 10 (build 19041 and newer) and Windows 11, both 64-bit. You need to run the loader
+          as administrator so it can attach to the game process and load the injector.
+        </div>
+      </details>
+      <details>
+        <summary>Is it really free and open source?<span class="plus">+</span></summary>
+        <div class="answer">
+          Completely. The loader is free to download, and the source for the injector and overlay is published on GitHub.
+          There are no subscriptions, hidden fees or paid tiers — just download from the official page and you're set.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta-banner">
+      <div class="inner">
+        <h2>Ready to dominate Marvel Rivals?</h2>
+        <p>Download rivals-unlock
